@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://1x3mulng1xbq"]
+
+[ext_resource type="Script" uid="uid://heaxla2guqaj" path="res://flower_manager.gd" id="1_vvjlc"]
+
+[node name="FlowerManager" type="Node2D" unique_id=2015380591]
+script = ExtResource("1_vvjlc")

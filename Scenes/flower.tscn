@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dhruiusce838o"]
+
+[ext_resource type="Script" uid="uid://pqur0wcee3gn" path="res://Scenes/flower.gd" id="1_4r3j5"]
+[ext_resource type="Texture2D" uid="uid://bmmykrt0dticv" path="res://graphics/Flowers/Red_flower.png" id="1_s3cv5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4r3j5"]
+radius = 8.0
+
+[node name="Flower" type="Node2D" unique_id=1531035598]
+script = ExtResource("1_4r3j5")
+
+[node name="Flower_sprite" type="Sprite2D" parent="." unique_id=1345069339]
+texture_filter = 1
+texture = ExtResource("1_s3cv5")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1524891180]
+
+[node name="Flower_area" type="CollisionShape2D" parent="Area2D" unique_id=1062308214]
+position = Vector2(1, -1)
+shape = SubResource("CircleShape2D_4r3j5")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
