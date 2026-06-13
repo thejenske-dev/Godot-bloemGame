@@ -5,11 +5,9 @@ extends Node2D
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		# Check if the event is a mouse click and the left mouse button was pressed
@@ -17,3 +15,6 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		print("pressed!")
 		# Removes the scene/node from the game safely
 		queue_free() # Replace with function body.
+
+func changeColor(FlowerColor:Color) -> void:
+	$Flower_sprite.self_modulate = FlowerColor
