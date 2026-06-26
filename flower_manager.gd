@@ -3,8 +3,10 @@ var flower = preload("res://Scenes/flower.tscn")
 var m_pos:Vector2
 var reset_active:bool = false
 var flowercolours_pos = 0
-var flowercolours = [0,0,0]
-var flowerColor : Color
+var flower_center_rgb = [0.957,0.173,0.502]
+var flower_leaves_rgb = [0.789, 0.623, 0.094]
+var flowerColor_center = Color(0.957,0.173,0.502)
+var flowerColor_leaves = Color(0.789, 0.623, 0.094)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,7 +20,9 @@ func _process(delta: float) -> void:
 		print(m_pos)
 		var flower_pos = Vector2(get_global_mouse_position())
 		new_flower.position = flower_pos
-		new_flower.changeColor(flowerColor)
+		new_flower.changeColor(flowerColor_center,flowerColor_leaves)
+		print("Center:" , flowerColor_center)
+		print("Leaves:" , flowerColor_leaves)
 		add_child(new_flower)
 		
 		
@@ -36,26 +40,26 @@ func _process(delta: float) -> void:
 			reset_active = false 
 		else:
 			print("No flowers :)")
-	
-	
 	#Changing flower colours
-	if(Input.is_action_just_pressed("arrow_up")):
+	if(Input.is_action_just_pressed("arrow_up") or Input.is_action_just_pressed("Scroll_up") ):
 		#Change flower colour sprite
-		if(flowercolours_pos <2):
-			flowercolours_pos +=1
-			flowercolours[flowercolours_pos] = 1
-		else:
-			flowercolours_pos =0
-			flowercolours[flowercolours_pos] = 1
-		flowerColor = Color(flowercolours[0],flowercolours[1],flowercolours[2])
+		setColors()
 		print("arrow_up pressed")
-	if(Input.is_action_just_pressed("arrow_down")):
-		#Change flower colour sprite
-		if(flowercolours_pos >0):
-			flowercolours_pos -=1
-			flowercolours[flowercolours_pos] = 0
-		else:
-			flowercolours_pos =2
-			flowercolours[flowercolours_pos] = 0
-		flowerColor = Color(flowercolours[0],flowercolours[1],flowercolours[2])
+	
+	if(Input.is_action_just_pressed("arrow_down") or Input.is_action_just_pressed("Scroll_down")):
+		setColors()
 		print("arrow_down pressed")		
+func setColors() -> void:
+	for i in range(flower_center_rgb.size()):
+		var randnr_cent = randf_range(0,1)
+		flower_center_rgb.set(i,randnr_cent)
+		print(i)
+		
+	for x in range(flower_leaves_rgb.size()):
+		var randnr_leave = randf_range(0,1)
+		flower_leaves_rgb.set(x, randnr_leave)
+		
+	flowerColor_center = Color(flower_center_rgb[0],flower_center_rgb[1],flower_center_rgb[2])
+	flowerColor_leaves = Color(flower_leaves_rgb[0],flower_leaves_rgb[1],flower_center_rgb[2])
+		
+	

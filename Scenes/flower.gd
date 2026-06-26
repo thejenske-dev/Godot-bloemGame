@@ -16,5 +16,6 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		# Removes the scene/node from the game safely
 		queue_free() # Replace with function body.
 
-func changeColor(FlowerColor:Color) -> void:
-	$Flower_sprite.self_modulate = FlowerColor
+func changeColor(Center:Color,Leaves:Color) -> void:
+	$Flower_leaves.self_modulate = Leaves
+	$Flower_center.self_modulate = Center
