@@ -3,8 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://dhruiusce838o" path="res://Scenes/flower.tscn" id="1_1m2ob"]
 [ext_resource type="Script" uid="uid://cakkslt2gfgmi" path="res://Scenes/ui/flower_preview.gd" id="1_4deg3"]
 [ext_resource type="Script" uid="uid://dwfvj3ytudp12" path="res://Scenes/ui/panel_container.gd" id="1_vk3gj"]
-[ext_resource type="Texture2D" uid="uid://bq7v55wivk1y8" path="res://graphics/Flowers/Grayscale_flowerLeaves.png" id="2_dublq"]
-[ext_resource type="Texture2D" uid="uid://cpq6f8b1dmg8t" path="res://graphics/Flowers/GrayScale_flowerCenter.png" id="3_4deg3"]
 
 [node name="Control" type="Control" unique_id=1855895762]
 custom_minimum_size = Vector2(16, 16)
@@ -42,16 +40,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vk3gj")
 
-[node name="flower_leaves" type="Sprite2D" parent="Panel/CenterContainer" unique_id=497430932]
-texture_filter = 1
-texture = ExtResource("2_dublq")
-
-[node name="flower_center" type="Sprite2D" parent="Panel/CenterContainer" unique_id=991769207]
-texture_filter = 1
-position = Vector2(0, -1)
-texture = ExtResource("3_4deg3")
-
 [node name="Flower" parent="Panel/CenterContainer" unique_id=1531035598 instance=ExtResource("1_1m2ob")]
-visible = false
 
 [connection signal="flowerColorChanged" from="Panel/CenterContainer/Flower" to="Panel/CenterContainer" method="_on_flower_flower_color_changed"]
