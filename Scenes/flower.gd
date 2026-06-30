@@ -1,5 +1,6 @@
 extends Node2D
 
+signal flowerColorChanged(leaves:Color,center:Color)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,3 +20,5 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 func changeColor(Center:Color,Leaves:Color) -> void:
 	$Flower_leaves.self_modulate = Leaves
 	$Flower_center.self_modulate = Center
+	flowerColorChanged.emit(Center,Leaves)
+	

@@ -2,18 +2,33 @@
 
 [ext_resource type="PackedScene" uid="uid://1x3mulng1xbq" path="res://Scenes/flower_manager.tscn" id="1_e1iue"]
 [ext_resource type="Texture2D" uid="uid://crgda3xxnt5fw" path="res://graphics/Backgrounds/grass.png" id="1_gxivy"]
+[ext_resource type="PackedScene" uid="uid://te1kgkqq1sny" path="res://Scenes/ui/Flower_preview.tscn" id="2_j0nyw"]
 
-[node name="Background" type="Node2D" unique_id=824780617]
+[node name="Game" type="Node2D" unique_id=824780617]
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1473801307]
-offset_left = 3.0
-offset_right = 1081.0
-offset_bottom = 629.0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1355975180]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1473801307]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_gxivy")
 stretch_mode = 1
 
-[node name="Camera2D" type="Camera2D" parent="TextureRect" unique_id=177642886]
-position = Vector2(176, 126)
-anchor_mode = 0
+[node name="FlowerManager" parent="CanvasLayer/TextureRect" unique_id=2015380591 instance=ExtResource("1_e1iue")]
+position = Vector2(-3, 0)
 
-[node name="FlowerManager" parent="." unique_id=2015380591 instance=ExtResource("1_e1iue")]
+[node name="Control" parent="CanvasLayer/TextureRect" unique_id=1855895762 instance=ExtResource("2_j0nyw")]
+layout_mode = 1
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 24.0
+offset_bottom = 8.0
+pivot_offset = Vector2(10, 0)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=177642886]
+position = Vector2(324, 184)
