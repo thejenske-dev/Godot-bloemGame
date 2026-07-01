@@ -14,5 +14,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func change_preview(center: Color, leaves: Color) -> void:
+func change_preview(center: Color, leaves: Color,part_sprite) -> void:
 	flower.changeColor(center,leaves)
+	flower.changeLeaves(part_sprite)

@@ -2,6 +2,7 @@ extends Node2D
 
 signal flowerColorChanged(leaves:Color,center:Color)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -21,4 +22,7 @@ func changeColor(Center:Color,Leaves:Color) -> void:
 	$Flower_leaves.self_modulate = Leaves
 	$Flower_center.self_modulate = Center
 	#flowerColorChanged.emit(Center,Leaves)
-	
+func changeLeaves(part_sprite) -> void:
+	print(part_sprite)
+	var texture = load(part_sprite)
+	$Flower_leaves.texture = texture

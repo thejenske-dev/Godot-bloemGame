@@ -13,6 +13,12 @@ var flowerColor_center = Color(0.957,0.173,0.502)
 var flowerColor_leaves = Color(0.789, 0.623, 0.094)
 @onready var control: Control = $"../Control"
 
+#All leave sprites ID's
+var leave_parts = ["uid://bq7v55wivk1y8","uid://dgxd2kcujjq1k","uid://ftdwa4k85otq"]
+var current_leave_id = 0
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -29,9 +35,9 @@ func _process(delta: float) -> void:
 		new_flower.position = flower_pos
 		#Set the color of the flower
 		new_flower.changeColor(flowerColor_center,flowerColor_leaves)
+		new_flower.changeLeaves(leave_parts[current_leave_id])
 		#Add the new flower to the node tree.
 		add_child(new_flower)
-		
 		
 		
 	#Resetting the garden and deletes all child flowers
@@ -53,14 +59,28 @@ func _process(delta: float) -> void:
 		#Changes both sprites
 		setColors()
 		#Change the UI preview flowers color
-		control.change_preview(flowerColor_center,flowerColor_leaves)
+		control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
 		
 	
 	if(Input.is_action_just_pressed("arrow_down") or Input.is_action_just_pressed("Scroll_down")):
 		#Changes both sprites
 		setColors()
 		#Change the UI preview flowers color
-		control.change_preview(flowerColor_center,flowerColor_leaves)
+		control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+		
+	if(Input.is_action_just_pressed("arrow_left")):
+		#Pick the next sprite in the dictionairy
+		if(current_leave_id < leave_parts.size()-1):
+			current_leave_id+=1
+			control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+	if(Input.is_action_just_pressed("arrow_right")):
+		#Pick the next sprite in the dictionairy
+		if(current_leave_id > 0):
+			current_leave_id-=1
+			control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+			
+		#Call Change leaves function and pass the sprite location
+		pass
 			
 		
 func setColors() -> void:

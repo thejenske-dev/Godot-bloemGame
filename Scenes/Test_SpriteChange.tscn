@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://i0txuunno2a0"]
+
+[ext_resource type="Script" uid="uid://bny1lq2d305ep" path="res://Scenes/test_sprite_change.gd" id="1_e3f0w"]
+[ext_resource type="Texture2D" uid="uid://bq7v55wivk1y8" path="res://graphics/Flowers/Grayscale_flowerLeaves.png" id="1_jj0jb"]
+
+[node name="Node2D" type="Node2D" unique_id=2055847671]
+script = ExtResource("1_e3f0w")
+
+[node name="Test_leave" type="Sprite2D" parent="." unique_id=896631024]
+texture_filter = 1
+texture = ExtResource("1_jj0jb")
