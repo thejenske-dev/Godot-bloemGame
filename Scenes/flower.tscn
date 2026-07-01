@@ -22,7 +22,6 @@ position = Vector2(0, -1)
 texture = ExtResource("3_88g82")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1524891180]
-visible = false
 
 [node name="Flower_area" type="CollisionShape2D" parent="Area2D" unique_id=1062308214]
 position = Vector2(1, -1)

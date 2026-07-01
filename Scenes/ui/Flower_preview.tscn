@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://te1kgkqq1sny"]
+
+[ext_resource type="PackedScene" uid="uid://dhruiusce838o" path="res://Scenes/flower.tscn" id="1_1m2ob"]
+[ext_resource type="Script" uid="uid://cakkslt2gfgmi" path="res://Scenes/ui/flower_preview.gd" id="1_4deg3"]
+[ext_resource type="Script" uid="uid://dwfvj3ytudp12" path="res://Scenes/ui/panel_container.gd" id="1_vk3gj"]
+
+[node name="Control" type="Control" unique_id=1855895762]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+script = ExtResource("1_4deg3")
+
+[node name="Panel" type="Panel" parent="." unique_id=544208509]
+self_modulate = Color(0.5735531, 0.45393944, 0.37649927, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel" unique_id=1499393155]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vk3gj")
+
+[node name="Flower" parent="Panel/CenterContainer" unique_id=1531035598 instance=ExtResource("1_1m2ob")]
+
+[connection signal="flowerColorChanged" from="Panel/CenterContainer/Flower" to="Panel/CenterContainer" method="_on_flower_flower_color_changed"]
