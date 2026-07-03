@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cakkslt2gfgmi" path="res://Scenes/ui/flower_preview.gd" id="1_4deg3"]
 [ext_resource type="Script" uid="uid://dwfvj3ytudp12" path="res://Scenes/ui/panel_container.gd" id="1_vk3gj"]
 
-[node name="Control" type="Control" unique_id=1855895762]
+[node name="Flower_preview_panel" type="Control" unique_id=1855895762]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 3
 anchors_preset = 4

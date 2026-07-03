@@ -1,6 +1,4 @@
 extends Control
-@onready var flower_leaves: Sprite2D = $Panel/CenterContainer/flower_leaves
-@onready var flower_center: Sprite2D = $Panel/CenterContainer/flower_center
 var flowerColor_center = Color(0.957,0.173,0.502)
 var flowerColor_leaves = Color(0.789, 0.623, 0.094)
 @onready var flower: Node2D = $Panel/CenterContainer/Flower

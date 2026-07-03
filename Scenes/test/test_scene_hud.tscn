@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://f67nmc0twx0j"]
+
+[ext_resource type="PackedScene" uid="uid://2vwq77xdqmwe" path="res://Scenes/ui/hud.tscn" id="1_mcsdw"]
+[ext_resource type="Texture2D" uid="uid://crgda3xxnt5fw" path="res://graphics/Backgrounds/grass.png" id="1_sbodg"]
+[ext_resource type="PackedScene" uid="uid://1x3mulng1xbq" path="res://Scenes/flower_manager.tscn" id="2_betgo"]
+
+[node name="Game" type="Node2D" unique_id=824780617]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1355975180]
+
+[node name="HUD" parent="CanvasLayer" unique_id=2056686909 instance=ExtResource("1_mcsdw")]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1473801307]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_sbodg")
+stretch_mode = 1
+
+[node name="FlowerManager" parent="CanvasLayer/TextureRect" unique_id=2015380591 instance=ExtResource("2_betgo")]
+position = Vector2(-3, 0)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=177642886]
+position = Vector2(324, 184)
