@@ -14,8 +14,15 @@ var flowerColor_leaves = Color(0.789, 0.623, 0.094)
 @onready var control: Control = $"../Control"
 
 #All leave sprites ID's
+
+
 var leave_parts = ["uid://bq7v55wivk1y8","uid://dgxd2kcujjq1k","uid://ftdwa4k85otq"]
+
 var current_leave_id = 0
+var laeve_part = leave_parts[0]
+
+signal update_preview(center_color,leave_color,leave_part)
+signal save_flower(center_color,leave_color,leave_part)
 
 
 
@@ -35,11 +42,10 @@ func _process(delta: float) -> void:
 		new_flower.position = flower_pos
 		#Set the color of the flower
 		new_flower.changeColor(flowerColor_center,flowerColor_leaves)
-		new_flower.changeLeaves(leave_parts[current_leave_id])
+		new_flower.changeLeaves(laeve_part)
 		#Add the new flower to the node tree.
 		add_child(new_flower)
-		
-		
+				
 	#Resetting the garden and deletes all child flowers
 	if(Input.is_action_just_pressed("Reset") and reset_active == false ):
 		reset_active = true
@@ -59,29 +65,38 @@ func _process(delta: float) -> void:
 		#Changes both sprites
 		setColors()
 		#Change the UI preview flowers color
-		control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
 		
-	
 	if(Input.is_action_just_pressed("arrow_down") or Input.is_action_just_pressed("Scroll_down")):
 		#Changes both sprites
 		setColors()
 		#Change the UI preview flowers color
-		control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
 		
 	if(Input.is_action_just_pressed("arrow_left")):
 		#Pick the next sprite in the dictionairy
 		if(current_leave_id < leave_parts.size()-1):
 			current_leave_id+=1
-			control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+			laeve_part = leave_parts[current_leave_id]
+			#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+			update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
+			
 	if(Input.is_action_just_pressed("arrow_right")):
 		#Pick the next sprite in the dictionairy
 		if(current_leave_id > 0):
 			current_leave_id-=1
-			control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+			laeve_part = leave_parts[current_leave_id]
+			#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+			update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
 			
 		#Call Change leaves function and pass the sprite location
 		pass
-			
+	
+	if(Input.is_action_just_pressed("Numpad_1")or Input.is_action_just_pressed("Main_1")):
+		#set the current flower state into the saved slot.
+		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part)
 		
 func setColors() -> void:
 	#Sets the 3 color values to a randomized value between 0 and 1
@@ -96,5 +111,11 @@ func setColors() -> void:
 	#Set the flower color vars with the new randomizes values
 	flowerColor_center = Color(flower_center_rgb[0],flower_center_rgb[1],flower_center_rgb[2])
 	flowerColor_leaves = Color(flower_leaves_rgb[0],flower_leaves_rgb[1],flower_center_rgb[2])
-		
+	
+func setFlower(center,leaves,leave_sprite) -> void:
+		flowerColor_center = center
+		flowerColor_leaves = leaves
+		laeve_part = leave_sprite
+		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
+	
 	

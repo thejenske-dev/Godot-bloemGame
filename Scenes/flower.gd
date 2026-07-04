@@ -1,7 +1,9 @@
 extends Node2D
 
-signal flowerColorChanged(leaves:Color,center:Color)
 
+
+var texture = load("res://graphics/Flowers/Grayscale_flowerLeaves.png")
+signal flowerColorChanged(leaves:Color,center:Color)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,6 +25,8 @@ func changeColor(Center:Color,Leaves:Color) -> void:
 	$Flower_center.self_modulate = Center
 	#flowerColorChanged.emit(Center,Leaves)
 func changeLeaves(part_sprite) -> void:
-	print(part_sprite)
-	var texture = load(part_sprite)
+	texture = load(part_sprite)
 	$Flower_leaves.texture = texture
+func getFlower():
+	var uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid($Flower_leaves.texture.resource_path))
+	return [$Flower_center.self_modulate,$Flower_leaves.self_modulate, uid]

@@ -17,9 +17,3 @@ func _process(delta: float) -> void:
 func change_preview(leaves: Color, center: Color) -> void:
 	flower_leaves.self_modulate = leaves
 	flower_center.self_modulate = center
-	
-
-func _on_flower_flower_color_changed(leaves: Color, center: Color) -> void:
-	flower_leaves.self_modulate = leaves
-	flower_center.self_modulate = center
-	

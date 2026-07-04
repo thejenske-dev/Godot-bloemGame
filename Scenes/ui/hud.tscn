@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://2vwq77xdqmwe"]
+
+[ext_resource type="Script" uid="uid://y41pw47byc40" path="res://Scenes/ui/hud.gd" id="1_8ercd"]
+[ext_resource type="PackedScene" uid="uid://te1kgkqq1sny" path="res://Scenes/ui/Flower_preview.tscn" id="1_e0onf"]
+[ext_resource type="PackedScene" uid="uid://fvyn3dt60q21" path="res://Scenes/ui/save_flower.tscn" id="3_kpdpg"]
+
+[node name="HUD" type="CanvasLayer" unique_id=2056686909]
+script = ExtResource("1_8ercd")
+
+[node name="Flower_preview_panel" parent="." unique_id=1855895762 instance=ExtResource("1_e0onf")]
+
+[node name="Save_Flower" parent="." unique_id=1653337932 instance=ExtResource("3_kpdpg")]
+
+[connection signal="setflower" from="Save_Flower" to="." method="_on_save_flower_setflower"]
