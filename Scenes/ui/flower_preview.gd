@@ -1,6 +1,6 @@
 extends Control
-var flowerColor_center = Color(0.957,0.173,0.502)
-var flowerColor_leaves = Color(0.789, 0.623, 0.094)
+var flowerColor_center = Color(0.898, 0.698, 0.149)
+var flowerColor_leaves = Color(0.871, 0.161, 0.114)
 @onready var flower: Node2D = $Panel/CenterContainer/Flower
 
 # Called when the node enters the scene tree for the first time.

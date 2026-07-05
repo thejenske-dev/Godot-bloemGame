@@ -27,6 +27,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Button" type="Button" parent="HBoxContainer" unique_id=2063817110]
+self_modulate = Color(1, 1, 1, 0.4862745)
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 
