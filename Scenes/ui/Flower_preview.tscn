@@ -14,7 +14,7 @@ grow_vertical = 2
 script = ExtResource("1_4deg3")
 
 [node name="Panel" type="Panel" parent="." unique_id=544208509]
-self_modulate = Color(0.5735531, 0.45393944, 0.37649927, 1)
+self_modulate = Color(1, 1, 1, 0.4862745)
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 1
 anchors_preset = 8

@@ -4,11 +4,158 @@
 [ext_resource type="PackedScene" uid="uid://te1kgkqq1sny" path="res://Scenes/ui/Flower_preview.tscn" id="1_e0onf"]
 [ext_resource type="PackedScene" uid="uid://fvyn3dt60q21" path="res://Scenes/ui/save_flower.tscn" id="3_kpdpg"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_kpdpg"]
+font_size = 3
+font_color = Color(1, 1, 1, 0.7607843)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bxpec"]
+resource_local_to_scene = true
+font_size = 3
+font_color = Color(1, 1, 1, 0.8901961)
+
 [node name="HUD" type="CanvasLayer" unique_id=2056686909]
 script = ExtResource("1_8ercd")
 
-[node name="Flower_preview_panel" parent="." unique_id=1855895762 instance=ExtResource("1_e0onf")]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=421700092]
+texture_filter = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -12.5
+offset_right = 28.0
+offset_bottom = 12.5
+grow_vertical = 2
 
-[node name="Save_Flower" parent="." unique_id=1653337932 instance=ExtResource("3_kpdpg")]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1008553181]
+texture_filter = 1
+layout_mode = 2
+text = "Flower preview"
+label_settings = SubResource("LabelSettings_kpdpg")
+horizontal_alignment = 1
 
-[connection signal="setflower" from="Save_Flower" to="." method="_on_save_flower_setflower"]
+[node name="Flower_preview_panel" parent="VBoxContainer" unique_id=1855895762 instance=ExtResource("1_e0onf")]
+texture_filter = 1
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1832852561]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -40.0
+offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 35
+
+[node name="Label2" type="Label" parent="VBoxContainer2" unique_id=1281659194]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Saved flowers"
+label_settings = SubResource("LabelSettings_bxpec")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2" unique_id=1993745733]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Save_Flower" parent="VBoxContainer2/HBoxContainer" unique_id=1653337932 instance=ExtResource("3_kpdpg")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/Save_Flower" unique_id=978612487]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = -21.0
+offset_right = 7.0
+offset_bottom = -16.0
+text = "1"
+label_settings = SubResource("LabelSettings_bxpec")
+horizontal_alignment = 2
+
+[node name="Save_Flower2" parent="VBoxContainer2/HBoxContainer" unique_id=1204488111 instance=ExtResource("3_kpdpg")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/Save_Flower2" unique_id=1757702427]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = -21.0
+offset_right = 7.0
+offset_bottom = -16.0
+text = "2"
+label_settings = SubResource("LabelSettings_bxpec")
+horizontal_alignment = 2
+
+[node name="Save_Flower3" parent="VBoxContainer2/HBoxContainer" unique_id=1902787763 instance=ExtResource("3_kpdpg")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/Save_Flower3" unique_id=137708223]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = -21.0
+offset_right = 7.0
+offset_bottom = -16.0
+text = "3"
+label_settings = SubResource("LabelSettings_bxpec")
+horizontal_alignment = 2
+
+[node name="Save_Flower4" parent="VBoxContainer2/HBoxContainer" unique_id=1700770913 instance=ExtResource("3_kpdpg")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/Save_Flower4" unique_id=1110458311]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = -21.0
+offset_right = 7.0
+offset_bottom = -16.0
+text = "4"
+label_settings = SubResource("LabelSettings_bxpec")
+horizontal_alignment = 2
+
+[node name="Save_Flower5" parent="VBoxContainer2/HBoxContainer" unique_id=2040271870 instance=ExtResource("3_kpdpg")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/Save_Flower5" unique_id=912549437]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = -21.0
+offset_right = 7.0
+offset_bottom = -16.0
+text = "5"
+label_settings = SubResource("LabelSettings_bxpec")
+horizontal_alignment = 2
+
+[node name="Save_Flower6" parent="VBoxContainer2/HBoxContainer" unique_id=1375260518 instance=ExtResource("3_kpdpg")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/Save_Flower6" unique_id=596865329]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = -21.0
+offset_right = 7.0
+offset_bottom = -16.0
+text = "6"
+label_settings = SubResource("LabelSettings_bxpec")
+horizontal_alignment = 2
+
+[connection signal="setflower" from="VBoxContainer2/HBoxContainer/Save_Flower" to="." method="_on_save_flower_setflower"]
+[connection signal="setflower" from="VBoxContainer2/HBoxContainer/Save_Flower2" to="." method="_on_save_flower_2_setflower"]
+[connection signal="setflower" from="VBoxContainer2/HBoxContainer/Save_Flower3" to="." method="_on_save_flower_3_setflower"]
+[connection signal="setflower" from="VBoxContainer2/HBoxContainer/Save_Flower4" to="." method="_on_save_flower_4_setflower"]
+[connection signal="setflower" from="VBoxContainer2/HBoxContainer/Save_Flower5" to="." method="_on_save_flower_5_setflower"]
+[connection signal="setflower" from="VBoxContainer2/HBoxContainer/Save_Flower6" to="." method="_on_save_flower_6_setflower"]
