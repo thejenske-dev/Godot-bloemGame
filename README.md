@@ -9,3 +9,4 @@ Controls:
 - R-Key : Delete all flowers
 - Left mouse key: Place flower
 - Right mouse key: Delete flower (when pressing on one)
+- Press 1 to save a flower setting
