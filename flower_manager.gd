@@ -62,9 +62,7 @@ func _process(delta: float) -> void:
 		sound_place_flower.pitch_scale = randf_range(pl_min_pith,pl_max_pitch)
 		sound_place_flower.play()
 		#Add the new flower to the node tree
-		$Flowers.add_child(new_flower)
-
-				
+		$Flowers.add_child(new_flower)				
 	#Resetting the garden and deletes all child flowers
 	if(Input.is_action_just_pressed("Reset") and reset_active == false ):
 		#Makes sure you cannot reset while resetting.
