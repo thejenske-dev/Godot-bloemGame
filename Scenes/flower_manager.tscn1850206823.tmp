@@ -7,15 +7,10 @@
 [node name="FlowerManager" type="Node2D" unique_id=2015380591]
 script = ExtResource("1_vvjlc")
 
-[node name="Sound" type="Node2D" parent="." unique_id=411097061]
-
-[node name="sound_place_flower" type="AudioStreamPlayer2D" parent="Sound" unique_id=1381430645]
+[node name="sound_place_flower" type="AudioStreamPlayer2D" parent="." unique_id=1381430645]
 stream = ExtResource("2_p4m3t")
 volume_db = 24.0
-pitch_scale = 0.5
 
-[node name="sound_delete_flower" type="AudioStreamPlayer2D" parent="Sound" unique_id=1058779528]
+[node name="sound_delete_flower" type="AudioStreamPlayer2D" parent="." unique_id=1058779528]
 stream = ExtResource("3_mg8eo")
 area_mask = 2
-
-[node name="Flowers" type="Node2D" parent="." unique_id=2110607121]
