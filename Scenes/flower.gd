@@ -1,6 +1,7 @@
 extends Node2D
 
 var leave_texture = load("res://graphics/Flowers/Grayscale_flowerLeaves.png")
+@onready var sound_delete_flower: AudioStreamPlayer2D = $sound_delete_flower
 
 signal flowerColorChanged(leaves:Color,center:Color)
 
@@ -15,8 +16,10 @@ func _process(delta: float) -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		# Check if the event is a mouse click and the left mouse button was pressed
 	if event is InputEventMouseButton and event.button_index == MouseButton.MOUSE_BUTTON_RIGHT and event.pressed:
-		print("pressed!")
+		#print("pressed!")
 		# Removes the scene/node from the game safely
+		sound_delete_flower.play()
+		await sound_delete_flower.finished
 		queue_free() # Replace with function body.
 
 func changeColor(Center:Color,Leaves:Color) -> void:

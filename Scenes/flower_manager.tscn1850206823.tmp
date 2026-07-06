@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://1x3mulng1xbq"]
+
+[ext_resource type="Script" uid="uid://heaxla2guqaj" path="res://flower_manager.gd" id="1_vvjlc"]
+[ext_resource type="AudioStream" uid="uid://bd4owbukn7clu" path="res://Sound/Flower_plant.wav" id="2_p4m3t"]
+[ext_resource type="AudioStream" uid="uid://bkapnudnhw5e8" path="res://Sound/Flower_delete.wav" id="3_mg8eo"]
+
+[node name="FlowerManager" type="Node2D" unique_id=2015380591]
+script = ExtResource("1_vvjlc")
+
+[node name="sound_place_flower" type="AudioStreamPlayer2D" parent="." unique_id=1381430645]
+stream = ExtResource("2_p4m3t")
+volume_db = 24.0
+
+[node name="sound_delete_flower" type="AudioStreamPlayer2D" parent="." unique_id=1058779528]
+stream = ExtResource("3_mg8eo")
+area_mask = 2

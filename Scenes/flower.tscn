@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://pqur0wcee3gn" path="res://Scenes/flower.gd" id="1_4r3j5"]
 [ext_resource type="Texture2D" uid="uid://bq7v55wivk1y8" path="res://graphics/Flowers/Grayscale_flowerLeaves.png" id="2_hbmji"]
 [ext_resource type="Texture2D" uid="uid://cpq6f8b1dmg8t" path="res://graphics/Flowers/GrayScale_flowerCenter.png" id="3_88g82"]
+[ext_resource type="AudioStream" uid="uid://bkapnudnhw5e8" path="res://Sound/Flower_delete.wav" id="4_88g82"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4r3j5"]
 radius = 8.0
@@ -21,10 +22,12 @@ texture_filter = 1
 texture = ExtResource("3_88g82")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1524891180]
-visible = false
 
 [node name="Flower_area" type="CollisionShape2D" parent="Area2D" unique_id=1062308214]
 position = Vector2(1, -1)
 shape = SubResource("CircleShape2D_4r3j5")
+
+[node name="sound_delete_flower" type="AudioStreamPlayer2D" parent="." unique_id=1157208389]
+stream = ExtResource("4_88g82")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
