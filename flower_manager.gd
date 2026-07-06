@@ -13,6 +13,20 @@ var flowerColor_center = Color(0.898, 0.698, 0.149)
 var flowerColor_leaves = Color(0.871, 0.161, 0.114)
 @onready var control: Control = $"../Control"
 
+#Sound
+#Deltion pitch fluctuations handling
+var del_max_pitch = 2
+var del_min_pith = 0.5
+var sound_state = "up"
+
+#Placing pitch fluctuations to create the random sounds
+var pl_max_pitch = 0.9
+var pl_min_pith = 0.3
+
+
+@onready var sound_place_flower: AudioStreamPlayer2D = $Sound/sound_place_flower
+@onready var sound_delete_flower: AudioStreamPlayer2D = $Sound/sound_delete_flower
+
 #All leave sprites ID's
 var leave_parts = ["uid://bq7v55wivk1y8","uid://dgxd2kcujjq1k","uid://ftdwa4k85otq"]
 var current_leave_id = 0
@@ -20,6 +34,7 @@ var laeve_part = leave_parts[0]
 
 signal update_preview(center_color,leave_color,leave_part)
 signal save_flower(center_color,leave_color,leave_part,slot)
+
 
 
 
@@ -43,20 +58,40 @@ func _process(delta: float) -> void:
 		#Set the color of the flower
 		new_flower.changeColor(flowerColor_center,flowerColor_leaves)
 		new_flower.changeLeaves(laeve_part)
-		#Add the new flower to the node tree.
-		add_child(new_flower)
+		#Play the placing sound, with a random range pitch
+		sound_place_flower.pitch_scale = randf_range(pl_min_pith,pl_max_pitch)
+		sound_place_flower.play()
+		#Add the new flower to the node tree
+		$Flowers.add_child(new_flower)
+
 				
 	#Resetting the garden and deletes all child flowers
 	if(Input.is_action_just_pressed("Reset") and reset_active == false ):
+		#Makes sure you cannot reset while resetting.
 		reset_active = true
 		#The time between the deletion of flowers.
+		
 		var delay=.1
-		if self.get_children()!= null:
-			for scene in self.get_children():
+		if $Flowers.get_children()!= null:
+			for scene in $Flowers.get_children():
 				await get_tree().create_timer(delay).timeout
+				#Define if the deletion sounds goes up or down
+				if(sound_delete_flower.pitch_scale >= del_max_pitch and sound_state == "up"):
+					sound_state = "down"
+				if(sound_delete_flower.pitch_scale <= del_min_pith and sound_state == "down"):
+					sound_state = "up"
+				#manipulate the pitch by a specific step	
+				if (sound_state == "up"):
+					sound_delete_flower.pitch_scale +=0.1
+				if (sound_state == "down"):
+					sound_delete_flower.pitch_scale -=0.1
+				#Play the soudn
+				sound_delete_flower.play()
 				scene.queue_free()
+				#Make the delay go down so flowers will be removed faster and faster.
 				delay -=.01
 			reset_active = false 
+		
 		else:
 			print("No flowers :)")
 			
