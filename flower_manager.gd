@@ -12,6 +12,7 @@ var flower_leaves_rgb = [0.871, 0.161, 0.114]
 var flowerColor_center = Color(0.898, 0.698, 0.149)
 var flowerColor_leaves = Color(0.871, 0.161, 0.114)
 @onready var control: Control = $"../Control"
+@onready var hud: CanvasLayer = $"../HUD"
 
 #Sound
 #Deltion pitch fluctuations handling
@@ -31,6 +32,11 @@ var pl_min_pith = 0.3
 var leave_parts = ["uid://bq7v55wivk1y8","uid://dgxd2kcujjq1k","uid://ftdwa4k85otq"]
 var current_leave_id = 0
 var laeve_part = leave_parts[0]
+
+#Particals
+@onready var place_flower: CPUParticles2D = $Particles/place_flower
+@onready var delete_flower_all: CPUParticles2D = $Particles/delete_flower_all
+var screen_center = Vector2(185.2, 100.6)
 
 signal update_preview(center_color,leave_color,leave_part)
 signal save_flower(center_color,leave_color,leave_part,slot)
@@ -55,23 +61,37 @@ func _process(delta: float) -> void:
 		#Set the flower position to the mouses position
 		var flower_pos = Vector2(get_global_mouse_position())
 		new_flower.position = flower_pos
+		print(flower_pos)
 		#Set the color of the flower
 		new_flower.changeColor(flowerColor_center,flowerColor_leaves)
 		new_flower.changeLeaves(laeve_part)
+		#Set particles
+		setParticles(flowerColor_leaves,laeve_part)
+		place_flower.position = flower_pos
+		place_flower.emitting = true
 		#Play the placing sound, with a random range pitch
 		sound_place_flower.pitch_scale = randf_range(pl_min_pith,pl_max_pitch)
 		sound_place_flower.play()
 		#Add the new flower to the node tree
-		$Flowers.add_child(new_flower)				
+		$Flowers.add_child(new_flower)
 	#Resetting the garden and deletes all child flowers
 	if(Input.is_action_just_pressed("Reset") and reset_active == false ):
 		#Makes sure you cannot reset while resetting.
 		reset_active = true
-		#The time between the deletion of flowers.
 		
+		#Setting particles:
+		#Genarate a random sprite
+		delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
+		delete_flower_all.self_modulate = flowerColor_leaves
+		delete_flower_all.position = screen_center
+		delete_flower_all.emitting = true
+		print(screen_center)
+		
+		#The time between the deletion of flowers.
 		var delay=.1
 		if $Flowers.get_children()!= null:
 			for scene in $Flowers.get_children():
+				
 				await get_tree().create_timer(delay).timeout
 				#Define if the deletion sounds goes up or down
 				if(sound_delete_flower.pitch_scale >= del_max_pitch and sound_state == "up"):
@@ -83,12 +103,17 @@ func _process(delta: float) -> void:
 					sound_delete_flower.pitch_scale +=0.1
 				if (sound_state == "down"):
 					sound_delete_flower.pitch_scale -=0.1
-				#Play the soudn
+				#Create new random particle
+				setColors()
+				delete_flower_all.self_modulate = flowerColor_leaves
+				delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
+				#Play the sound
 				sound_delete_flower.play()
 				scene.queue_free()
 				#Make the delay go down so flowers will be removed faster and faster.
 				delay -=.01
-			reset_active = false 
+			reset_active = false
+			delete_flower_all.emitting = false
 		
 		else:
 			print("No flowers :)")
@@ -177,5 +202,9 @@ func setFlower(center,leaves,leave_sprite) -> void:
 		flowerColor_leaves = leaves
 		laeve_part = leave_sprite
 		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
-	
+
+func setParticles(color,sprite) -> void:
+	var texture = load(sprite)
+	place_flower.texture = texture
+	place_flower.self_modulate = color
 	

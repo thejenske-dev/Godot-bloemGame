@@ -1,11 +1,67 @@
 [gd_scene format=3 uid="uid://1x3mulng1xbq"]
 
 [ext_resource type="Script" uid="uid://heaxla2guqaj" path="res://flower_manager.gd" id="1_vvjlc"]
+[ext_resource type="Texture2D" uid="uid://bq7v55wivk1y8" path="res://graphics/Flowers/Grayscale_flowerLeaves.png" id="2_34k0u"]
 [ext_resource type="AudioStream" uid="uid://bd4owbukn7clu" path="res://Sound/Flower_plant.wav" id="2_p4m3t"]
 [ext_resource type="AudioStream" uid="uid://bkapnudnhw5e8" path="res://Sound/Flower_delete.wav" id="3_mg8eo"]
 
+[sub_resource type="Curve" id="Curve_06cqm"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.007978726, 1.7311271), 0.0, 0.0, 0, 0, Vector2(0.9920212, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_34k0u"]
+_limits = [0.0, 2.3784904, 0.0, 1.0]
+_data = [Vector2(0.031914897, 0), 0.0, 0.0, 0, 0, Vector2(0.9707447, 0.74773645), 1.211789, 0.0, 0, 0]
+point_count = 2
+
 [node name="FlowerManager" type="Node2D" unique_id=2015380591]
 script = ExtResource("1_vvjlc")
+
+[node name="Particles" type="Node2D" parent="." unique_id=1370962910]
+
+[node name="place_flower" type="CPUParticles2D" parent="Particles" unique_id=908752617]
+visibility_layer = 2
+texture_filter = 1
+emitting = false
+amount = 10
+texture = ExtResource("2_34k0u")
+lifetime = 0.5
+one_shot = true
+emission_shape = 1
+emission_sphere_radius = 7.06
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(1, 1)
+radial_accel_min = 20.0
+radial_accel_max = 50.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_06cqm")
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+anim_offset_max = 1.0
+
+[node name="delete_flower_all" type="CPUParticles2D" parent="Particles" unique_id=1060386226]
+visibility_layer = 2
+texture_filter = 1
+emitting = false
+amount = 50
+texture = ExtResource("2_34k0u")
+emission_shape = 1
+emission_sphere_radius = 7.06
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(1, 1)
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+radial_accel_min = 20.0
+radial_accel_max = 50.0
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_34k0u")
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+anim_offset_max = 1.0
 
 [node name="Sound" type="Node2D" parent="." unique_id=411097061]
 

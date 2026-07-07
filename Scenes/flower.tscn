@@ -8,6 +8,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_4r3j5"]
 radius = 8.0
 
+[sub_resource type="Curve" id="Curve_88g82"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.007978726, 1.7311271), 0.0, 0.0, 0, 0, Vector2(0.9920212, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Flower" type="Node2D" unique_id=1531035598]
 script = ExtResource("1_4r3j5")
 
@@ -29,5 +34,26 @@ shape = SubResource("CircleShape2D_4r3j5")
 
 [node name="sound_delete_flower" type="AudioStreamPlayer2D" parent="." unique_id=1157208389]
 stream = ExtResource("4_88g82")
+
+[node name="delete_flower" type="CPUParticles2D" parent="." unique_id=473576435]
+visibility_layer = 2
+texture_filter = 1
+emitting = false
+amount = 10
+texture = ExtResource("2_hbmji")
+lifetime = 0.5
+one_shot = true
+emission_shape = 1
+emission_sphere_radius = 7.06
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(1, 1)
+radial_accel_min = 20.0
+radial_accel_max = 50.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_88g82")
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+anim_offset_max = 1.0
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
