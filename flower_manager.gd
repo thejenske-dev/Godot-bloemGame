@@ -32,6 +32,9 @@ var leave_parts = ["uid://bq7v55wivk1y8","uid://dgxd2kcujjq1k","uid://ftdwa4k85o
 var current_leave_id = 0
 var laeve_part = leave_parts[0]
 
+#Particals
+@onready var place_flower: CPUParticles2D = $Particles/place_flower
+
 signal update_preview(center_color,leave_color,leave_part)
 signal save_flower(center_color,leave_color,leave_part,slot)
 
@@ -58,6 +61,10 @@ func _process(delta: float) -> void:
 		#Set the color of the flower
 		new_flower.changeColor(flowerColor_center,flowerColor_leaves)
 		new_flower.changeLeaves(laeve_part)
+		#Set particles
+		setParticles(flowerColor_leaves,laeve_part)
+		place_flower.position = flower_pos
+		place_flower.emitting = true
 		#Play the placing sound, with a random range pitch
 		sound_place_flower.pitch_scale = randf_range(pl_min_pith,pl_max_pitch)
 		sound_place_flower.play()
@@ -177,5 +184,9 @@ func setFlower(center,leaves,leave_sprite) -> void:
 		flowerColor_leaves = leaves
 		laeve_part = leave_sprite
 		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
-	
+
+func setParticles(color,sprite) -> void:
+	var texture = load(sprite)
+	place_flower.texture = texture
+	place_flower.self_modulate = color
 	
