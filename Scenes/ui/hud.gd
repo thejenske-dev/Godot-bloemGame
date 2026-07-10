@@ -65,3 +65,10 @@ func _on_save_flower_5_setflower(center_color: Variant, leave_color: Variant, le
 func _on_save_flower_6_setflower(center_color: Variant, leave_color: Variant, leave_part: Variant) -> void:
 	#Comes from the saved flower UI element -> Will set the current flower in the manager
 	flower_manager.setFlower(center_color,leave_color,leave_part)
+
+
+func _on_flower_preview_panel_setflower(center_color: Variant, leave_color: Variant, leave_part: Variant) -> void:
+	flower_manager.setFlower(center_color,leave_color,leave_part)
+
+func getPreviewFlower():
+	flower_preview_panel.getFlowerState()
