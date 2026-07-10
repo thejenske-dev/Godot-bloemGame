@@ -59,5 +59,6 @@ func checkShiny():
 		
 		star_sparkle.self_modulate = $Flower_center.self_modulate
 		star_sparkle.emitting = true
+		
 func setShinyLock(state:bool):
 	shinyLock = state
