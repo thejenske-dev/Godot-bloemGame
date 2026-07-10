@@ -68,6 +68,9 @@ func _process(delta: float) -> void:
 		
 	#Resetting the garden and deletes all child flowers
 	if(Input.is_action_just_pressed("Reset") and reset_active == false ):
+		var saved_center_color = flowerColor_center
+		var saved_leave_color = flowerColor_leaves
+		var saved_leave_part = leave_parts
 		#Makes sure you cannot reset while resetting.
 		reset_active = true
 		
@@ -106,6 +109,11 @@ func _process(delta: float) -> void:
 				delay -=.01
 			reset_active = false
 			delete_flower_all.emitting = false
+			
+			hud.getPreviewFlower()
+			#flowerColor_center = saved_center_color
+			#flowerColor_leaves = saved_leave_color
+			#leave_parts = saved_leave_part
 		
 		else:
 			print("No flowers :)")
@@ -209,6 +217,7 @@ func placeFlower() -> void:
 	#Set the color of the flower
 	new_flower.changeColor(flowerColor_center,flowerColor_leaves)
 	new_flower.changeLeaves(laeve_part)
+	new_flower.setShinyLock(false)
 	#Set particles
 	setParticles(flowerColor_leaves,laeve_part)
 	place_flower.position = flower_pos

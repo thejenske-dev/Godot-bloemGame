@@ -153,6 +153,7 @@ text = "6"
 label_settings = SubResource("LabelSettings_bxpec")
 horizontal_alignment = 2
 
+[connection signal="setflower" from="VBoxContainer/Flower_preview_panel" to="." method="_on_flower_preview_panel_setflower"]
 [connection signal="setflower" from="VBoxContainer2/HBoxContainer/Save_Flower" to="." method="_on_save_flower_setflower"]
 [connection signal="setflower" from="VBoxContainer2/HBoxContainer/Save_Flower2" to="." method="_on_save_flower_2_setflower"]
 [connection signal="setflower" from="VBoxContainer2/HBoxContainer/Save_Flower3" to="." method="_on_save_flower_3_setflower"]
