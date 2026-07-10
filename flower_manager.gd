@@ -36,7 +36,7 @@ var laeve_part = leave_parts[0]
 #Particals
 @onready var place_flower: CPUParticles2D = $Particles/place_flower
 @onready var delete_flower_all: CPUParticles2D = $Particles/delete_flower_all
-var screen_center = Vector2(185.2, 100.6)
+var mouse_pos =  Vector2(get_global_mouse_position())
 
 signal update_preview(center_color,leave_color,leave_part)
 signal save_flower(center_color,leave_color,leave_part,slot)
@@ -51,29 +51,21 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#Track mouse
+	mouse_pos =  Vector2(get_global_mouse_position())
 	#When you left click, a new flower will spawn at mouse location.
 	if(Input.is_action_just_pressed("Left_Click")):
+		var click_delay =.1
 		if get_viewport().gui_get_hovered_control() != null:
 			return # Mouse is over UI, ignore world click
+		while (Input.is_action_pressed("Left_Click")):
+			placeFlower()
+			await get_tree().create_timer(click_delay).timeout
 	
-		#Creata a new flower scene
-		var new_flower = flower.instantiate()
-		#Set the flower position to the mouses position
-		var flower_pos = Vector2(get_global_mouse_position())
-		new_flower.position = flower_pos
-		print(flower_pos)
-		#Set the color of the flower
-		new_flower.changeColor(flowerColor_center,flowerColor_leaves)
-		new_flower.changeLeaves(laeve_part)
-		#Set particles
-		setParticles(flowerColor_leaves,laeve_part)
-		place_flower.position = flower_pos
-		place_flower.emitting = true
-		#Play the placing sound, with a random range pitch
-		sound_place_flower.pitch_scale = randf_range(pl_min_pith,pl_max_pitch)
-		sound_place_flower.play()
-		#Add the new flower to the node tree
-		$Flowers.add_child(new_flower)
+		
+	
+
+		
 	#Resetting the garden and deletes all child flowers
 	if(Input.is_action_just_pressed("Reset") and reset_active == false ):
 		#Makes sure you cannot reset while resetting.
@@ -83,9 +75,8 @@ func _process(delta: float) -> void:
 		#Genarate a random sprite
 		delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
 		delete_flower_all.self_modulate = flowerColor_leaves
-		delete_flower_all.position = screen_center
+		delete_flower_all.position = mouse_pos
 		delete_flower_all.emitting = true
-		print(screen_center)
 		
 		#The time between the deletion of flowers.
 		var delay=.1
@@ -107,6 +98,7 @@ func _process(delta: float) -> void:
 				setColors()
 				delete_flower_all.self_modulate = flowerColor_leaves
 				delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
+				delete_flower_all.position = mouse_pos
 				#Play the sound
 				sound_delete_flower.play()
 				scene.queue_free()
@@ -154,8 +146,7 @@ func _process(delta: float) -> void:
 		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
 		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
 
-	
-	
+
 	#Save slot logic
 	if(Input.is_action_just_pressed("Numpad_1")or Input.is_action_just_pressed("Main_1")):
 		#set the current flower state into the saved slot.
@@ -207,4 +198,23 @@ func setParticles(color,sprite) -> void:
 	var texture = load(sprite)
 	place_flower.texture = texture
 	place_flower.self_modulate = color
-	
+
+func placeFlower() -> void: 
+	#Creata a new flower scene
+	var new_flower = flower.instantiate()
+	#Set the flower position to the mouses position
+	var flower_pos = Vector2(get_global_mouse_position())
+	new_flower.position = flower_pos
+		
+	#Set the color of the flower
+	new_flower.changeColor(flowerColor_center,flowerColor_leaves)
+	new_flower.changeLeaves(laeve_part)
+	#Set particles
+	setParticles(flowerColor_leaves,laeve_part)
+	place_flower.position = flower_pos
+	place_flower.emitting = true
+	#Play the placing sound, with a random range pitch
+	sound_place_flower.pitch_scale = randf_range(pl_min_pith,pl_max_pitch)
+	sound_place_flower.play()
+	#Add the new flower to the node tree
+	$Flowers.add_child(new_flower)
