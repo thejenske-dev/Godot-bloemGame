@@ -72,3 +72,30 @@ func _on_flower_preview_panel_setflower(center_color: Variant, leave_color: Vari
 
 func getPreviewFlower():
 	flower_preview_panel.getFlowerState()
+
+
+
+
+#Touchscreen support: Change flower state in the manager, so it matched the preview
+func _on_btn_change_flower_color_pressed() -> void:
+	#Radomize the color
+	flower_manager.setColors()
+	#Set the flower in the preview correct
+	var flower_data = flower_manager.getFlower()
+	print(flower_data)
+	var center_color = flower_data[0]
+	var leave_color = flower_data[1]
+	var leave_sprite = flower_data[2]
+	flower_preview_panel.change_preview(center_color,leave_color,leave_sprite)
+	
+	#Send the new flower to the manager
+	flower_preview_panel.getFlowerState()
+
+func _on_btn_change_leave_part_pressed() -> void:
+	#Change the leaves of the flower
+	flower_manager.changeLeaves()
+	pass # Replace with function body.
+
+
+func _on_btn_reset_pressed() -> void:
+	flower_manager.reset()

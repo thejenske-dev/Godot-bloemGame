@@ -5,17 +5,14 @@
 [ext_resource type="Script" uid="uid://dwfvj3ytudp12" path="res://Scenes/ui/panel_container.gd" id="1_vk3gj"]
 
 [node name="Flower_preview_panel" type="Control" unique_id=1855895762]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 3
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-grow_vertical = 2
+anchors_preset = 0
+size_flags_horizontal = 4
 script = ExtResource("1_4deg3")
 
 [node name="Panel" type="Panel" parent="." unique_id=544208509]
 self_modulate = Color(1, 1, 1, 0.4862745)
-custom_minimum_size = Vector2(16, 16)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,8 +25,9 @@ offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.2, 1.2)
 
-[node name="CenterContainer" type="CenterContainer" parent="Panel" unique_id=1499393155]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1499393155]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -40,6 +38,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vk3gj")
 
-[node name="Flower" parent="Panel/CenterContainer" unique_id=1531035598 instance=ExtResource("1_1m2ob")]
+[node name="Flower" parent="CenterContainer" unique_id=1531035598 instance=ExtResource("1_1m2ob")]
+position = Vector2(1, 2)
+scale = Vector2(1.2, 1.2)
 
-[connection signal="flowerColorChanged" from="Panel/CenterContainer/Flower" to="Panel/CenterContainer" method="_on_flower_flower_color_changed"]
+[connection signal="flowerColorChanged" from="CenterContainer/Flower" to="CenterContainer" method="_on_flower_flower_color_changed"]
