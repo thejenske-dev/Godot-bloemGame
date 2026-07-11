@@ -69,8 +69,72 @@ func _process(delta: float) -> void:
 	#Resetting the garden and deletes all child flowers
 	if(Input.is_action_just_pressed("Reset") and reset_active == false ):
 		reset()
+	#Changing flower colors
+	if(Input.is_action_just_pressed("arrow_up") or Input.is_action_just_pressed("Scroll_up") ):
+		#Changes both sprites
+		print("scrolled")
+		setColors()
+		#Change the UI preview flowers color
+		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
+		
+	if(Input.is_action_just_pressed("arrow_down") or Input.is_action_just_pressed("Scroll_down")):
+		#Changes both sprites
+		setColors()
+		#Change the UI preview flowers color
+		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
+		
+	if(Input.is_action_just_pressed("arrow_left")):
+		#Pick the next sprite in the dictionairy
+		if(current_leave_id == leave_parts.size()-1):
+			current_leave_id =0
+		elif(current_leave_id < leave_parts.size()-1):
+			current_leave_id+=1
+		laeve_part = leave_parts[current_leave_id]
+		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
+			
+	if(Input.is_action_just_pressed("arrow_right")):
+		#Pick the next sprite in the dictionairy
+		if(current_leave_id == 0):
+			current_leave_id = leave_parts.size()-1
+		elif(current_leave_id > 0):
+			current_leave_id-=1
+		
+		laeve_part = leave_parts[current_leave_id]
+		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
 
 
+
+
+
+	#Save slot logic
+	if(Input.is_action_just_pressed("Numpad_1")or Input.is_action_just_pressed("Main_1")):
+		#set the current flower state into the saved slot.
+		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,1)
+	
+	if(Input.is_action_just_pressed("Numpad_2")or Input.is_action_just_pressed("Main_2")):
+		#set the current flower state into the saved slot.
+		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,2)
+		
+	if(Input.is_action_just_pressed("Numpad_3")or Input.is_action_just_pressed("Main_3")):
+		#set the current flower state into the saved slot.
+		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,3)
+	
+	if(Input.is_action_just_pressed("Numpad_4")or Input.is_action_just_pressed("Main_4")):
+		#set the current flower state into the saved slot.
+		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,4)
+		
+	if(Input.is_action_just_pressed("Numpad_5")or Input.is_action_just_pressed("Main_5")):
+		#set the current flower state into the saved slot.
+		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,5)
+		
+	if(Input.is_action_just_pressed("Numpad_6")or Input.is_action_just_pressed("Main_6")):
+		#set the current flower state into the saved slot.
+		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,6)	
+		
 func reset():
 	#Makes sure you cannot reset while resetting.
 	reset_active = true
@@ -119,69 +183,6 @@ func reset():
 	else:
 		return
 			
-	#Changing flower colors
-	if(Input.is_action_just_pressed("arrow_up") or Input.is_action_just_pressed("Scroll_up") ):
-		#Changes both sprites
-		setColors()
-		#Change the UI preview flowers color
-		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
-		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
-		
-	if(Input.is_action_just_pressed("arrow_down") or Input.is_action_just_pressed("Scroll_down")):
-		#Changes both sprites
-		setColors()
-		#Change the UI preview flowers color
-		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
-		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
-		
-	if(Input.is_action_just_pressed("arrow_left")):
-		#Pick the next sprite in the dictionairy
-		if(current_leave_id == leave_parts.size()-1):
-			current_leave_id =0
-		elif(current_leave_id < leave_parts.size()-1):
-			current_leave_id+=1
-		laeve_part = leave_parts[current_leave_id]
-		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
-		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
-			
-	if(Input.is_action_just_pressed("arrow_right")):
-		#Pick the next sprite in the dictionairy
-		if(current_leave_id == 0):
-			current_leave_id = leave_parts.size()-1
-		elif(current_leave_id > 0):
-			current_leave_id-=1
-		
-		laeve_part = leave_parts[current_leave_id]
-		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
-		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
-
-
-	#Save slot logic
-	if(Input.is_action_just_pressed("Numpad_1")or Input.is_action_just_pressed("Main_1")):
-		#set the current flower state into the saved slot.
-		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,1)
-	
-	if(Input.is_action_just_pressed("Numpad_2")or Input.is_action_just_pressed("Main_2")):
-		#set the current flower state into the saved slot.
-		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,2)
-		
-	if(Input.is_action_just_pressed("Numpad_3")or Input.is_action_just_pressed("Main_3")):
-		#set the current flower state into the saved slot.
-		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,3)
-	
-	if(Input.is_action_just_pressed("Numpad_4")or Input.is_action_just_pressed("Main_4")):
-		#set the current flower state into the saved slot.
-		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,4)
-		
-	if(Input.is_action_just_pressed("Numpad_5")or Input.is_action_just_pressed("Main_5")):
-		#set the current flower state into the saved slot.
-		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,5)
-		
-	if(Input.is_action_just_pressed("Numpad_6")or Input.is_action_just_pressed("Main_6")):
-		#set the current flower state into the saved slot.
-		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,6)	
-		
-		
 			
 func setColors() -> void:
 	#Sets the 3 color values to a randomized value between 0 and 1
