@@ -68,59 +68,11 @@ func _process(delta: float) -> void:
 		
 	#Resetting the garden and deletes all child flowers
 	if(Input.is_action_just_pressed("Reset") and reset_active == false ):
-		var saved_center_color = flowerColor_center
-		var saved_leave_color = flowerColor_leaves
-		var saved_leave_part = leave_parts
-		#Makes sure you cannot reset while resetting.
-		reset_active = true
-		
-		#Setting particles:
-		#Genarate a random sprite
-		delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
-		delete_flower_all.self_modulate = flowerColor_leaves
-		delete_flower_all.position = mouse_pos
-		delete_flower_all.emitting = true
-		
-		#The time between the deletion of flowers.
-		var delay=.1
-		if $Flowers.get_children()!= null:
-			for scene in $Flowers.get_children():
-				
-				await get_tree().create_timer(delay).timeout
-				#Define if the deletion sounds goes up or down
-				if(sound_delete_flower.pitch_scale >= del_max_pitch and sound_state == "up"):
-					sound_state = "down"
-				if(sound_delete_flower.pitch_scale <= del_min_pith and sound_state == "down"):
-					sound_state = "up"
-				#manipulate the pitch by a specific step	
-				if (sound_state == "up"):
-					sound_delete_flower.pitch_scale +=0.1
-				if (sound_state == "down"):
-					sound_delete_flower.pitch_scale -=0.1
-				#Create new random particle
-				setColors()
-				delete_flower_all.self_modulate = flowerColor_leaves
-				delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
-				delete_flower_all.position = mouse_pos
-				#Play the sound
-				sound_delete_flower.play()
-				scene.queue_free()
-				#Make the delay go down so flowers will be removed faster and faster.
-				delay -=.01
-			reset_active = false
-			delete_flower_all.emitting = false
-			
-			hud.getPreviewFlower()
-			#flowerColor_center = saved_center_color
-			#flowerColor_leaves = saved_leave_color
-			#leave_parts = saved_leave_part
-		
-		else:
-			print("No flowers :)")
-			
+		reset()
 	#Changing flower colors
 	if(Input.is_action_just_pressed("arrow_up") or Input.is_action_just_pressed("Scroll_up") ):
 		#Changes both sprites
+		print("scrolled")
 		setColors()
 		#Change the UI preview flowers color
 		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
@@ -155,6 +107,9 @@ func _process(delta: float) -> void:
 		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
 
 
+
+
+
 	#Save slot logic
 	if(Input.is_action_just_pressed("Numpad_1")or Input.is_action_just_pressed("Main_1")):
 		#set the current flower state into the saved slot.
@@ -180,7 +135,54 @@ func _process(delta: float) -> void:
 		#set the current flower state into the saved slot.
 		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,6)	
 		
+func reset():
+	#Makes sure you cannot reset while resetting.
+	reset_active = true
 		
+	#Setting particles:
+	#Genarate a random sprite
+	delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
+	delete_flower_all.self_modulate = flowerColor_leaves
+	delete_flower_all.position = mouse_pos
+	delete_flower_all.emitting = true
+		
+		#The time between the deletion of flowers.
+	var delay=.1
+	if $Flowers.get_children()!= null:
+		for scene in $Flowers.get_children():
+				
+			await get_tree().create_timer(delay).timeout
+			#Define if the deletion sounds goes up or down
+			if(sound_delete_flower.pitch_scale >= del_max_pitch and sound_state == "up"):
+				sound_state = "down"
+			if(sound_delete_flower.pitch_scale <= del_min_pith and sound_state == "down"):
+				sound_state = "up"
+			#manipulate the pitch by a specific step	
+			if (sound_state == "up"):
+				sound_delete_flower.pitch_scale +=0.1
+			if (sound_state == "down"):
+				sound_delete_flower.pitch_scale -=0.1
+			#Create new random particle
+			setColors()
+			delete_flower_all.self_modulate = flowerColor_leaves
+			delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
+			delete_flower_all.position = mouse_pos
+			#Play the sound
+			sound_delete_flower.play()
+			scene.queue_free()
+			#Make the delay go down so flowers will be removed faster and faster.
+			delay -=.01
+		reset_active = false
+		delete_flower_all.emitting = false
+			
+		hud.getPreviewFlower()
+			#flowerColor_center = saved_center_color
+			#flowerColor_leaves = saved_leave_color
+			#leave_parts = saved_leave_part
+		
+	else:
+		return
+			
 			
 func setColors() -> void:
 	#Sets the 3 color values to a randomized value between 0 and 1
@@ -201,6 +203,19 @@ func setFlower(center,leaves,leave_sprite) -> void:
 		flowerColor_leaves = leaves
 		laeve_part = leave_sprite
 		update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
+
+func changeLeaves():
+	if(current_leave_id == 0):
+		current_leave_id = leave_parts.size()-1
+	elif(current_leave_id > 0):
+		current_leave_id-=1
+	laeve_part = leave_parts[current_leave_id]
+		#control.change_preview(flowerColor_center,flowerColor_leaves,leave_parts[current_leave_id])
+	update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
+
+func getFlower():
+	var flower_data = [flowerColor_center,flowerColor_leaves,laeve_part]
+	return flower_data
 
 func setParticles(color,sprite) -> void:
 	var texture = load(sprite)

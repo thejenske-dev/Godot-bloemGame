@@ -1,7 +1,7 @@
 extends Control
 var flowerColor_center = Color(0.898, 0.698, 0.149)
 var flowerColor_leaves = Color(0.871, 0.161, 0.114)
-@onready var flower: Node2D = $Panel/CenterContainer/Flower
+@onready var flower: Node2D = $CenterContainer/Flower
 
 #Needed to set flower after rest is done
 signal setflower(center_color,leave_color,leave_part)
