@@ -13,7 +13,7 @@ config_version=5
 config/name="Bloemania"
 run/main_scene="uid://tg5lnttwgc7k"
 config/features=PackedStringArray("4.6", "Forward Plus")
-boot_splash/image="uid://c46dl2l18k52i"
+boot_splash/image="uid://c85wptgxvco8e"
 config/icon="res://graphics/Misc/Red_flower.ico"
 
 [display]
