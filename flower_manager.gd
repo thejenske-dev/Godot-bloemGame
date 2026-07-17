@@ -46,7 +46,7 @@ signal save_flower(center_color,leave_color,leave_part,slot)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	RandomSaveSlots()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -242,3 +242,31 @@ func placeFlower() -> void:
 	sound_place_flower.play()
 	#Add the new flower to the node tree
 	$Flowers.add_child(new_flower)
+
+
+	
+func RandomSaveSlots() -> void:
+	pass
+	#Loop x times
+	var x = 7
+	#Define a local leave ID
+	var leave_id = round(randf_range(0,leave_parts.size()-1))
+	for i in range(x):
+		#Call the color randomize function
+		setColors()
+		#Randomize the leave ID
+		leave_id = round(randf_range(0,leave_parts.size()-1))
+		#Set the leave sprite ID
+		laeve_part = leave_parts[leave_id]
+		#Save the flower to the current save flower UI element
+		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,i)	
+		#Incremen the loop var
+		i+=1
+	#When done, update the preview to the correct flower in the manager.
+	update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
+		
+	#Go through all the available save slots
+	#Set the color of a flower
+	#Set the leaves of a flower
+	#Save the flower
+	
