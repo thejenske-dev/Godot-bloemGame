@@ -4,6 +4,11 @@ var leave_texture = load("res://graphics/Flowers/Grayscale_flowerLeaves.png")
 @onready var sound_delete_flower: AudioStreamPlayer2D = $sound_delete_flower
 @onready var delete_flower: CPUParticles2D = $delete_flower
 @onready var star_sparkle: CPUParticles2D = $star_sparkle
+
+@onready var flower: Node2D = $"."
+
+
+
 var shinyLock = true
 
 
@@ -32,7 +37,15 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		await sound_delete_flower.finished
 		# Removes the scene/node from the game safely
 		queue_free() # Replace with function body.
-	#if(Input.is_action_just_pressed("Right_Click")):
+	if event is InputEventMouseButton and event.button_index == MouseButton.MOUSE_BUTTON_MIDDLE and event.pressed:
+		print("Clicked flower!")
+		
+		#var uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid($Flower_leaves.texture.resource_path))
+		var flowerData = self.getFlower()
+		var flower_manager = get_parent().get_parent()
+		flower_manager.setFlower(flowerData[0],flowerData[1],flowerData[2])
+		
+		
 		
 func changeColor(Center:Color,Leaves:Color) -> void:
 
