@@ -247,14 +247,22 @@ func placeFlower() -> void:
 	
 func RandomSaveSlots() -> void:
 	pass
-	var x = 6
+	#Loop x times
+	var x = 7
+	#Define a local leave ID
 	var leave_id = round(randf_range(0,leave_parts.size()-1))
 	for i in range(x):
+		#Call the color randomize function
 		setColors()
+		#Randomize the leave ID
 		leave_id = round(randf_range(0,leave_parts.size()-1))
+		#Set the leave sprite ID
 		laeve_part = leave_parts[leave_id]
+		#Save the flower to the current save flower UI element
 		save_flower.emit(flowerColor_center,flowerColor_leaves,laeve_part,i)	
+		#Incremen the loop var
 		i+=1
+	#When done, update the preview to the correct flower in the manager.
 	update_preview.emit(flowerColor_center,flowerColor_leaves,laeve_part)
 		
 	#Go through all the available save slots
