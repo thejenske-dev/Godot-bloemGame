@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://2vwq77xdqmwe" path="res://Scenes/ui/hud.tscn" id="1_1j7hx"]
 [ext_resource type="Texture2D" uid="uid://crgda3xxnt5fw" path="res://graphics/Backgrounds/grass.png" id="2_fuqmp"]
 [ext_resource type="PackedScene" uid="uid://1x3mulng1xbq" path="res://Scenes/flower_manager.tscn" id="3_fuqmp"]
+[ext_resource type="PackedScene" uid="uid://bldmr4h64iqb5" path="res://Scenes/bug.tscn" id="4_cdixy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cdixy"]
 texture = ExtResource("2_fuqmp")
@@ -10,6 +11,11 @@ texture = ExtResource("2_fuqmp")
 
 [sub_resource type="TileSet" id="TileSet_l3ii5"]
 sources/0 = SubResource("TileSetAtlasSource_cdixy")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_fuqmp"]
+vertices = PackedVector2Array(2115.9219, 1131.0938, -74.97656, 1152.8906, -73.00781, -53.007813, 2107.0703, -55.976563)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-83, -63, -85, 1163, 2126, 1141, 2117, -66)])
 
 [node name="Main" type="Node2D" unique_id=558292955]
 
@@ -21,6 +27,12 @@ tile_map_data = PackedByteArray("AAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAUAAAAAAAA
 tile_set = SubResource("TileSet_l3ii5")
 
 [node name="FlowerManager" parent="." unique_id=2015380591 instance=ExtResource("3_fuqmp")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1107304559]
+navigation_polygon = SubResource("NavigationPolygon_fuqmp")
+
+[node name="Bug" parent="." unique_id=2046706618 instance=ExtResource("4_cdixy")]
+position = Vector2(81, 38)
 
 [connection signal="save_flower" from="FlowerManager" to="HUD" method="_on_flower_manager_save_flower"]
 [connection signal="update_preview" from="FlowerManager" to="HUD" method="_on_flower_manager_update_preview"]

@@ -5,8 +5,8 @@ var leave_texture = load("res://graphics/Flowers/Grayscale_flowerLeaves.png")
 @onready var delete_flower: CPUParticles2D = $delete_flower
 @onready var star_sparkle: CPUParticles2D = $star_sparkle
 
-@onready var flower: Node2D = $"."
-
+var eaten: bool = false
+var regrow_time = 10
 
 
 var shinyLock = true
@@ -21,7 +21,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if eaten: 
+		$Flower_leaves.visible = false
+	else:
+		$Flower_leaves.visible = true
+
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		# Check if the event is a mouse click and the left mouse button was pressed
@@ -75,3 +79,13 @@ func checkShiny():
 		
 func setShinyLock(state:bool):
 	shinyLock = state
+
+func setEaten(state:bool):
+	self.eaten = state
+	self.remove_from_group("flower")
+	self.add_to_group("eaten_flower")
+	await get_tree().create_timer(regrow_time).timeout
+	self.remove_from_group("eaten_flower")
+	self.add_to_group("flower")
+	self.eaten = false
+	

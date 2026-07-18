@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c85wptgxvco8e"
-path="res://.godot/imported/Bloemania splash.jpg-4d98dc6c8cd49f094a9cae9ff30d3d56.ctex"
+uid="uid://t1kbryww0edx"
+path="res://.godot/imported/Bloemania splash.png-9b2849848c2ddccc50dc2452d1327370.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/Misc/Bloemania splash.jpg"
-dest_files=["res://.godot/imported/Bloemania splash.jpg-4d98dc6c8cd49f094a9cae9ff30d3d56.ctex"]
+source_file="res://graphics/Misc/Bloemania splash.png"
+dest_files=["res://.godot/imported/Bloemania splash.png-9b2849848c2ddccc50dc2452d1327370.ctex"]
 
 [params]
 

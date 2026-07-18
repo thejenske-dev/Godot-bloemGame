@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bldmr4h64iqb5"]
+
+[ext_resource type="Script" uid="uid://bnmkb077wihcu" path="res://Scenes/bug.gd" id="1_ivymh"]
+[ext_resource type="Texture2D" uid="uid://cya4uxnhcwcm7" path="res://icon.svg" id="1_wgok0"]
+
+[node name="Bug" type="CharacterBody2D" unique_id=971353219]
+script = ExtResource("1_ivymh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1182375146]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_wgok0")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=179362432]
+avoidance_enabled = true

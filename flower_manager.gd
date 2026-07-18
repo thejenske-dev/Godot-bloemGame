@@ -240,6 +240,7 @@ func placeFlower() -> void:
 	#Play the placing sound, with a random range pitch
 	sound_place_flower.pitch_scale = randf_range(pl_min_pith,pl_max_pitch)
 	sound_place_flower.play()
+	new_flower.add_to_group("flower")
 	#Add the new flower to the node tree
 	$Flowers.add_child(new_flower)
 
