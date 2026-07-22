@@ -1,14 +1,221 @@
 [gd_scene format=3 uid="uid://bldmr4h64iqb5"]
 
 [ext_resource type="Script" uid="uid://bnmkb077wihcu" path="res://Scenes/bug.gd" id="1_ivymh"]
-[ext_resource type="Texture2D" uid="uid://cya4uxnhcwcm7" path="res://icon.svg" id="1_wgok0"]
+[ext_resource type="Texture2D" uid="uid://b2ekkwgl1wjwc" path="res://graphics/Bugs/Rups_1.png" id="2_ivymh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivymh"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o37m6"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhcfo"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch8ul"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_do0xn"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmxrj"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(192, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3evl"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(208, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pqvq"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(224, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhewd"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lv5s"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aiyty"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1snn"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rl6r1"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(256, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvj8o"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(240, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6c11"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(224, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3ptk"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(208, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5lfs"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(192, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60nhf"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybwfh"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(272, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltaw2"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(256, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tr1r"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(240, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cty3t"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oeccb"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fhcfo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivymh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o37m6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhcfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch8ul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_do0xn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmxrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3evl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2pqvq")
+}],
+"loop": false,
+"name": &"Cocooning",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhewd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lv5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aiyty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1snn")
+}],
+"loop": true,
+"name": &"Eating",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rl6r1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvj8o")
+}],
+"loop": true,
+"name": &"Flying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6c11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3ptk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5lfs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60nhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybwfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltaw2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tr1r")
+}],
+"loop": false,
+"name": &"Hatching",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_bhewd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lv5s")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_aiyty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1snn")
+}],
+"loop": true,
+"name": &"Looking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cty3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oeccb")
+}],
+"loop": true,
+"name": &"Walking",
+"speed": 5.0
+}]
 
 [node name="Bug" type="CharacterBody2D" unique_id=971353219]
 script = ExtResource("1_ivymh")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1182375146]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_wgok0")
+[node name="Animated_Sprite_2d" type="AnimatedSprite2D" parent="." unique_id=1577379982]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_fhcfo")
+animation = &"Flying"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=179362432]
 avoidance_enabled = true

@@ -4,9 +4,11 @@ var leave_texture = load("res://graphics/Flowers/Grayscale_flowerLeaves.png")
 @onready var sound_delete_flower: AudioStreamPlayer2D = $sound_delete_flower
 @onready var delete_flower: CPUParticles2D = $delete_flower
 @onready var star_sparkle: CPUParticles2D = $star_sparkle
+@onready var pollen: CPUParticles2D = $pollen
 
 var eaten: bool = false
-var regrow_time = 10
+var polinated: bool = false
+var regrow_time = 30
 
 
 var shinyLock = true
@@ -88,4 +90,12 @@ func setEaten(state:bool):
 	self.remove_from_group("eaten_flower")
 	self.add_to_group("flower")
 	self.eaten = false
+
+func setPolinated(state:bool):
+	self.polinated = state
+	self.remove_from_group("flower")
 	
+	self.add_to_group("polenated_flowers")
+	#Change in the future
+	pollen.self_modulate = $Flower_center.self_modulate
+	pollen.emitting = true

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cpq6f8b1dmg8t" path="res://graphics/Flowers/GrayScale_flowerCenter.png" id="3_88g82"]
 [ext_resource type="AudioStream" uid="uid://bkapnudnhw5e8" path="res://Sound/Flower_delete.wav" id="4_88g82"]
 [ext_resource type="Texture2D" uid="uid://r0ig5rkhsklg" path="res://graphics/Flowers/Graysacle_star.png" id="5_ei51o"]
+[ext_resource type="Texture2D" uid="uid://tdsqukukc2s0" path="res://graphics/Flowers/Pollen.png" id="6_gd0df"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4r3j5"]
 radius = 8.0
@@ -49,6 +50,7 @@ stream = ExtResource("4_88g82")
 
 [node name="delete_flower" type="CPUParticles2D" parent="." unique_id=473576435]
 visibility_layer = 2
+z_index = 1
 texture_filter = 1
 emitting = false
 amount = 10
@@ -73,6 +75,22 @@ texture_filter = 1
 emitting = false
 amount = 3
 texture = ExtResource("5_ei51o")
+lifetime = 0.3
+emission_shape = 2
+emission_sphere_radius = 9.92
+spread = 180.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_gd0df")
+color_initial_ramp = SubResource("Gradient_d2yni")
+hue_variation_curve = SubResource("Curve_d1m62")
+
+[node name="pollen" type="CPUParticles2D" parent="." unique_id=6628265]
+texture_filter = 1
+emitting = false
+amount = 3
+texture = ExtResource("6_gd0df")
 lifetime = 0.3
 emission_shape = 2
 emission_sphere_radius = 9.92

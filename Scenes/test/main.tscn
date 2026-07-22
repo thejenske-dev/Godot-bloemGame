@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://2vwq77xdqmwe" path="res://Scenes/ui/hud.tscn" id="1_1j7hx"]
 [ext_resource type="Texture2D" uid="uid://crgda3xxnt5fw" path="res://graphics/Backgrounds/grass.png" id="2_fuqmp"]
 [ext_resource type="PackedScene" uid="uid://1x3mulng1xbq" path="res://Scenes/flower_manager.tscn" id="3_fuqmp"]
-[ext_resource type="PackedScene" uid="uid://bldmr4h64iqb5" path="res://Scenes/bug.tscn" id="4_cdixy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cdixy"]
 texture = ExtResource("2_fuqmp")
@@ -30,9 +29,6 @@ tile_set = SubResource("TileSet_l3ii5")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1107304559]
 navigation_polygon = SubResource("NavigationPolygon_fuqmp")
-
-[node name="Bug" parent="." unique_id=2046706618 instance=ExtResource("4_cdixy")]
-position = Vector2(81, 38)
 
 [connection signal="save_flower" from="FlowerManager" to="HUD" method="_on_flower_manager_save_flower"]
 [connection signal="update_preview" from="FlowerManager" to="HUD" method="_on_flower_manager_update_preview"]
