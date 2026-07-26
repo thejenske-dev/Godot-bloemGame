@@ -95,6 +95,30 @@ region = Rect2(80, 16, 16, 16)
 atlas = ExtResource("2_ivymh")
 region = Rect2(96, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dj1jw"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(256, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye5h5"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(272, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxdao"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(288, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2na7o"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(288, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbpno"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(272, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h628w"]
+atlas = ExtResource("2_ivymh")
+region = Rect2(256, 16, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1v4xk"]
 atlas = ExtResource("2_ivymh")
 region = Rect2(16, 16, 16, 16)
@@ -205,6 +229,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dj1jw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye5h5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxdao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2na7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbpno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h628w")
+}],
+"loop": true,
+"name": &"Polinating",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_1v4xk")
 }, {
 "duration": 1.0,
@@ -229,7 +276,10 @@ script = ExtResource("1_ivymh")
 [node name="Animated_Sprite_2d" type="AnimatedSprite2D" parent="." unique_id=1577379982]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_fhcfo")
-animation = &"egg"
+animation = &"Polinating"
+frame = 5
+frame_progress = 1.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=179362432]
 avoidance_enabled = true
+debug_enabled = true

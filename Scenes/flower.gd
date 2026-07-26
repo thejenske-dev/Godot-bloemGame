@@ -9,6 +9,8 @@ var leave_texture = load("res://graphics/Flowers/Grayscale_flowerLeaves.png")
 var eaten: bool = false
 var polinated: bool = false
 var regrow_time = 30
+var egg_time = 60
+var holds_egg:bool = false
 
 
 var shinyLock = true
@@ -69,7 +71,7 @@ func getFlower():
 	return [$Flower_center.self_modulate,$Flower_leaves.self_modulate, uid]
 
 func checkShiny():
-	if(round(randf_range(0,100)) == 1):
+	if(randi()%100+1 == 1):
 		var center = $Flower_center.self_modulate
 		var leaves = $Flower_leaves.self_modulate
 		#Revert colors
@@ -93,9 +95,29 @@ func setEaten(state:bool):
 
 func setPolinated(state:bool):
 	self.polinated = state
-	self.remove_from_group("flower")
-	
-	self.add_to_group("polenated_flowers")
-	#Change in the future
-	pollen.self_modulate = $Flower_center.self_modulate
-	pollen.emitting = true
+	if self.polinated == true:
+		self.remove_from_group("flower")
+		self.add_to_group("polenated_flowers")
+		#Change in the future
+		pollen.self_modulate = $Flower_center.self_modulate
+		pollen.emitting = true
+	else:
+		self.remove_from_group("polenated_flowers")
+		self.add_to_group("flower")
+		pollen.emitting = false
+
+func setHoldsEgg(state:bool):
+	self.holds_egg = state
+	if holds_egg:
+		self.remove_from_group("flower")
+		self.add_to_group("holds_egg")
+		#After some time the flower can have an egg again
+		await get_tree().create_timer(egg_time).timeout
+		self.remove_from_group("holds_egg")
+		self.add_to_group("flower")
+		self.holds_egg = false
+	else:
+		self.remove_from_group("holds_egg")
+		self.add_to_group("flower")
+		
+		

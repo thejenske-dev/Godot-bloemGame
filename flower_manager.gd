@@ -47,7 +47,7 @@ signal update_preview(center_color,leave_color,leave_part)
 signal save_flower(center_color,leave_color,leave_part,slot)
 
 #Bugs
-var bugs_chance = 50
+var bugs_chance = 25
 
 
 # Called when the node enters the scene tree for the first time.
@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 			return # Mouse is over UI, ignore world click
 		while (Input.is_action_pressed("Left_Click")):
 			placeFlower()
-			if (round(randf_range(0,bugs_chance))==1):
+			if (randi()%bugs_chance==1):
 				placeBug()
 			await get_tree().create_timer(click_delay).timeout
 	
