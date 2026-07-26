@@ -12,9 +12,9 @@ texture = ExtResource("2_fuqmp")
 sources/0 = SubResource("TileSetAtlasSource_cdixy")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_fuqmp"]
-vertices = PackedVector2Array(2115.9219, 1131.0938, -74.97656, 1152.8906, -73.00781, -53.007813, 2107.0703, -55.976563)
+vertices = PackedVector2Array(2423.1328, -208.07031, 2443.8594, 1331.9766, -377, 1329.0078, -377, -228.92188)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-83, -63, -85, 1163, 2126, 1141, 2117, -66)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-387, -239, -387, 1339, 2454, 1342, 2433, -218)])
 
 [node name="Main" type="Node2D" unique_id=558292955]
 
