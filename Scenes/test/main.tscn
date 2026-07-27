@@ -11,6 +11,11 @@ texture = ExtResource("2_fuqmp")
 [sub_resource type="TileSet" id="TileSet_l3ii5"]
 sources/0 = SubResource("TileSetAtlasSource_cdixy")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_fuqmp"]
+vertices = PackedVector2Array(2423.1328, -208.07031, 2443.8594, 1331.9766, -377, 1329.0078, -377, -228.92188)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-387, -239, -387, 1339, 2454, 1342, 2433, -218)])
+
 [node name="Main" type="Node2D" unique_id=558292955]
 
 [node name="HUD" parent="." unique_id=2056686909 instance=ExtResource("1_1j7hx")]
@@ -21,6 +26,9 @@ tile_map_data = PackedByteArray("AAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAUAAAAAAAA
 tile_set = SubResource("TileSet_l3ii5")
 
 [node name="FlowerManager" parent="." unique_id=2015380591 instance=ExtResource("3_fuqmp")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1107304559]
+navigation_polygon = SubResource("NavigationPolygon_fuqmp")
 
 [connection signal="save_flower" from="FlowerManager" to="HUD" method="_on_flower_manager_save_flower"]
 [connection signal="update_preview" from="FlowerManager" to="HUD" method="_on_flower_manager_update_preview"]

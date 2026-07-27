@@ -1,6 +1,11 @@
 extends Node2D
 #Preload the flower scene
 var flower = preload("res://Scenes/flower.tscn")
+
+#Preload Bug scene
+var bug = preload("res://Scenes/bug.tscn")
+
+
 #Flower position
 var m_pos:Vector2
 #Reset active flag
@@ -41,7 +46,8 @@ var mouse_pos =  Vector2(get_global_mouse_position())
 signal update_preview(center_color,leave_color,leave_part)
 signal save_flower(center_color,leave_color,leave_part,slot)
 
-
+#Bugs
+var bugs_chance = 50
 
 
 # Called when the node enters the scene tree for the first time.
@@ -60,6 +66,8 @@ func _process(delta: float) -> void:
 			return # Mouse is over UI, ignore world click
 		while (Input.is_action_pressed("Left_Click")):
 			placeFlower()
+			if (randi()%bugs_chance==1):
+				placeBug()
 			await get_tree().create_timer(click_delay).timeout
 	
 		
@@ -137,52 +145,52 @@ func _process(delta: float) -> void:
 		
 func reset():
 	#Makes sure you cannot reset while resetting.
-	reset_active = true
+	if !reset_active:
+		reset_active = true
 		
-	#Setting particles:
-	#Genarate a random sprite
-	delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
-	delete_flower_all.self_modulate = flowerColor_leaves
-	delete_flower_all.position = mouse_pos
-	delete_flower_all.emitting = true
+		#Setting particles:
+		#Genarate a random sprite
+		delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
+		delete_flower_all.self_modulate = flowerColor_leaves
+		delete_flower_all.position = mouse_pos
+		delete_flower_all.emitting = true
 		
 		#The time between the deletion of flowers.
-	var delay=.1
-	if $Flowers.get_children()!= null:
-		for scene in $Flowers.get_children():
+		var delay=.1
+		if $Flowers.get_children()!= null:
+			for scene in $Flowers.get_children():
 				
-			await get_tree().create_timer(delay).timeout
-			#Define if the deletion sounds goes up or down
-			if(sound_delete_flower.pitch_scale >= del_max_pitch and sound_state == "up"):
-				sound_state = "down"
-			if(sound_delete_flower.pitch_scale <= del_min_pith and sound_state == "down"):
-				sound_state = "up"
-			#manipulate the pitch by a specific step	
-			if (sound_state == "up"):
-				sound_delete_flower.pitch_scale +=0.1
-			if (sound_state == "down"):
-				sound_delete_flower.pitch_scale -=0.1
-			#Create new random particle
-			setColors()
-			delete_flower_all.self_modulate = flowerColor_leaves
-			delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
-			delete_flower_all.position = mouse_pos
-			#Play the sound
-			sound_delete_flower.play()
-			scene.queue_free()
-			#Make the delay go down so flowers will be removed faster and faster.
-			delay -=.01
-		reset_active = false
-		delete_flower_all.emitting = false
+				await get_tree().create_timer(delay).timeout
+				#Define if the deletion sounds goes up or down
+				if(sound_delete_flower.pitch_scale >= del_max_pitch and sound_state == "up"):
+					sound_state = "down"
+				if(sound_delete_flower.pitch_scale <= del_min_pith and sound_state == "down"):
+					sound_state = "up"
+				#manipulate the pitch by a specific step	
+				if (sound_state == "up"):
+					sound_delete_flower.pitch_scale +=0.1
+				if (sound_state == "down"):
+					sound_delete_flower.pitch_scale -=0.1
+				#Create new random particle
+				setColors()
+				delete_flower_all.self_modulate = flowerColor_leaves
+				delete_flower_all.texture = load(leave_parts[round(randf_range(0,leave_parts.size()-1))])
+				delete_flower_all.position = mouse_pos
+				#Play the sound
+				sound_delete_flower.play()
+				scene.queue_free()
+				#Make the delay go down so flowers will be removed faster and faster.
+				delay -=.01
+			reset_active = false
+			delete_flower_all.emitting = false
 			
-		hud.getPreviewFlower()
+			hud.getPreviewFlower()
 			#flowerColor_center = saved_center_color
 			#flowerColor_leaves = saved_leave_color
 			#leave_parts = saved_leave_part
 		
-	else:
-		return
-			
+		else:
+			return
 			
 func setColors() -> void:
 	#Sets the 3 color values to a randomized value between 0 and 1
@@ -240,11 +248,16 @@ func placeFlower() -> void:
 	#Play the placing sound, with a random range pitch
 	sound_place_flower.pitch_scale = randf_range(pl_min_pith,pl_max_pitch)
 	sound_place_flower.play()
+	new_flower.add_to_group("flower")
 	#Add the new flower to the node tree
 	$Flowers.add_child(new_flower)
 
+func placeBug() -> void:
+	var new_bug = bug.instantiate()
+	var bug_pos = Vector2(get_global_mouse_position())
+	new_bug.position = bug_pos
+	$Bugs.add_child(new_bug)
 
-	
 func RandomSaveSlots() -> void:
 	pass
 	#Loop x times

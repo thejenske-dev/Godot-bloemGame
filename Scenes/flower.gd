@@ -4,9 +4,13 @@ var leave_texture = load("res://graphics/Flowers/Grayscale_flowerLeaves.png")
 @onready var sound_delete_flower: AudioStreamPlayer2D = $sound_delete_flower
 @onready var delete_flower: CPUParticles2D = $delete_flower
 @onready var star_sparkle: CPUParticles2D = $star_sparkle
+@onready var pollen: CPUParticles2D = $pollen
 
-@onready var flower: Node2D = $"."
-
+var eaten: bool = false
+var polinated: bool = false
+var regrow_time = 30
+var egg_time = 60
+var holds_egg:bool = false
 
 
 var shinyLock = true
@@ -21,7 +25,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if eaten: 
+		$Flower_leaves.visible = false
+	else:
+		$Flower_leaves.visible = true
+
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		# Check if the event is a mouse click and the left mouse button was pressed
@@ -63,7 +71,7 @@ func getFlower():
 	return [$Flower_center.self_modulate,$Flower_leaves.self_modulate, uid]
 
 func checkShiny():
-	if(round(randf_range(0,100)) == 1):
+	if(randi()%100+1 == 1):
 		var center = $Flower_center.self_modulate
 		var leaves = $Flower_leaves.self_modulate
 		#Revert colors
@@ -75,3 +83,41 @@ func checkShiny():
 		
 func setShinyLock(state:bool):
 	shinyLock = state
+
+func setEaten(state:bool):
+	self.eaten = state
+	self.remove_from_group("flower")
+	self.add_to_group("eaten_flower")
+	await get_tree().create_timer(regrow_time).timeout
+	self.remove_from_group("eaten_flower")
+	self.add_to_group("flower")
+	self.eaten = false
+
+func setPolinated(state:bool):
+	self.polinated = state
+	if self.polinated == true:
+		self.remove_from_group("flower")
+		self.add_to_group("polenated_flowers")
+		#Change in the future
+		pollen.self_modulate = $Flower_center.self_modulate
+		pollen.emitting = true
+	else:
+		self.remove_from_group("polenated_flowers")
+		self.add_to_group("flower")
+		pollen.emitting = false
+
+func setHoldsEgg(state:bool):
+	self.holds_egg = state
+	if holds_egg:
+		self.remove_from_group("flower")
+		self.add_to_group("holds_egg")
+		#After some time the flower can have an egg again
+		await get_tree().create_timer(egg_time).timeout
+		self.remove_from_group("holds_egg")
+		self.add_to_group("flower")
+		self.holds_egg = false
+	else:
+		self.remove_from_group("holds_egg")
+		self.add_to_group("flower")
+		
+		
