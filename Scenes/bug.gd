@@ -4,18 +4,18 @@ extends CharacterBody2D
 var walk_speed = round(randf_range(5.0,15.0))
 var gowth_stage = 0
 #Time it takes to eat a flower
-var eating_speed = round(randf_range(1,3))
+var eating_speed = round(randf_range(1,6))
 #The time it takes in a cocoon state
-var cocoonTime = round(randf_range(2,3))
+var cocoonTime = round(randf_range(5,15))
 #var die_time =  round(randf_range(10,30))
 var target: Node2D = null 
 var state = "egg"
-var polination_time= round(randf_range(2,6))
+var polination_time= round(randf_range(2,9))
 
 #Amount of flowers a bug has eten
 var eaten_flowers = 0
 #Amount of flowers needed to be eaten before next stage
-var growth_treshhold:int = round(randf_range(2,3))
+var growth_treshhold:int = round(randf_range(2,10))
 
 var target_position: Vector2 = Vector2.ZERO
 var rotation_speed: float = .2
@@ -163,7 +163,6 @@ func get_random_object(objects):
 	var total_amount = objects.size()-1
 	#Select a random object in the list
 	selected = objects[round(randf_range(0,total_amount))]
-	#print(selected)
 	return selected
 
 
@@ -236,6 +235,9 @@ func eat():
 							#Play eating animation
 							animated_sprite_2d.play("Eating")
 							await get_tree().create_timer(eating_speed).timeout
+							if !is_instance_valid(current_target):
+								state = "find_target"
+								return
 							#When done eating:
 							if is_instance_valid(current_target):
 								#Reteive the leave color of the eaten flower
@@ -246,10 +248,10 @@ func eat():
 								$Animated_Sprite_2d.self_modulate = flowerdata[1]
 								#Add 1 to the amound of flowers eaten
 								eaten_flowers+=1
-								print(eaten_flowers)
+
 								#When amount eaten flowers is treshhold, grow into cocoon
 								if(eaten_flowers == growth_treshhold):
-									print("Cocoon time!")
+									
 									state = "cocooning"
 									return
 					
@@ -258,16 +260,16 @@ func eat():
 				3: #Butterlfy
 					#Roll a random action value to determine what the butterfly will do.
 					var action_chance = randi()%10+1
-					print("Action chance = " + str(action_chance) )
+					
 					#When the value is 1,2
-					if action_chance <=2:
-						print("I am out of here!")
+					if action_chance <=1:
+						
 						#The butterfly will fly off screen
 						state= "dying"
 						return
 					#When 3,4,5,6 then Polinate a flower
-					if action_chance >=3 and action_chance<=6:
-						print("Trying to polinate")
+					if action_chance >=2 and action_chance<=6:
+						
 						#Check if the target still exists
 						if is_instance_valid(current_target):
 							#Check if a flower is already polinated?
@@ -289,7 +291,7 @@ func eat():
 							return
 					#When 7,8,9,10 : Lay an egg if the targer is a polenated flower
 					if action_chance >=7 and action_chance<=10:
-						print("Trying to lay egg")
+					
 						#Check if the target still exists
 						if is_instance_valid(current_target):
 							if(current_target.get_groups().has("polenated_flowers")):
@@ -310,7 +312,6 @@ func cocooning():
 	state = "hatching"
 func hatching():
 	gowth_stage +=1
-	#print(gowth_stage)
 	match gowth_stage:
 		1: 
 			await get_tree().create_timer(cocoonTime).timeout

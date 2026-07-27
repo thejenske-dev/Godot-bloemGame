@@ -47,7 +47,7 @@ signal update_preview(center_color,leave_color,leave_part)
 signal save_flower(center_color,leave_color,leave_part,slot)
 
 #Bugs
-var bugs_chance = 25
+var bugs_chance = 50
 
 
 # Called when the node enters the scene tree for the first time.

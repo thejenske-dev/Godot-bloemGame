@@ -282,4 +282,3 @@ frame_progress = 1.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=179362432]
 avoidance_enabled = true
-debug_enabled = true
